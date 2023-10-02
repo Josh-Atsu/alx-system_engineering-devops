@@ -1,2 +1,2 @@
 #!/bin/bash
-echo ""(Öo)'" > file2 | cat file2
+echo "(Öo)'" > file2 | cat file2
