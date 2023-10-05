@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "0base=16: $DECIMAL" | bc
+printf '%x\n' $DECIMAL
