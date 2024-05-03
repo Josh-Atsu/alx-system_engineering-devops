@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # a bash shell that displays the running process
 
-ps -eo user,pid,ppid,%cpu,%mem,vsz,rss,tty,stat,start,time,cmd --forest -a
+ps -u -H 
