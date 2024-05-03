@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# a bash shell that displays the running process
+
+ps -u
