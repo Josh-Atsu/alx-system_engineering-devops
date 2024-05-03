@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# a bash shell that dispalys its own pid
+
+pid=&(ps)
+echo "$pid"
