@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# To kill the process for executable file "./4-to_infinity_and_beyond"
+# Don't use kill or killall
+
+pkill ./4-to_infinity_and_beyond
