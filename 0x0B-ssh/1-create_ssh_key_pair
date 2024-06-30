@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Creating RSA key-pair with passphrase
 
-ssh-keygen -t rsa -b 4096 -f "/root/.ssh/school" -N "betty"
+ssh-keygen -t rsa -b 4096 -f "school" -N "betty"
