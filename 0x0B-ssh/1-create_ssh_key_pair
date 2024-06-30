@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Creating RSA key-pair with passphrase
+
+ssh-keygen
