@@ -3,7 +3,7 @@
 # using the private key ~/.ssh/school
 # with the user ubuntu
 
-Private_key="~/.ssh/id_rsa"
+Private_key="~/.ssh/school"
 user="ubuntu"
 Server_address="54.208.157.253"
 
