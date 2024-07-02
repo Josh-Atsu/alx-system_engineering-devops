@@ -1,4 +1,3 @@
-#!/usr/bin/pup
 # creating a packege
 
 package { 'python3-pip':
