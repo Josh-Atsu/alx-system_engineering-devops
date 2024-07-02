@@ -1,9 +1,8 @@
 #!/usr/bin/pup
 # creating a packege
 
-package { 'python3':
-  ensure   => '3.8.10',
-  provider => 'pip3',
+package { 'python3-pip':
+  ensure => installed,
 }
 
 package { 'flask':
