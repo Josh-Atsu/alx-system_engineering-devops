@@ -16,7 +16,11 @@ sudo ufw allow 'Nginx HTTP'
 # a page to return containing hello world
 echo "Hello World!" > /var/www/html/index.html
 
-sudo sed -i '/^}/i \ \n\trewrite ^/redirect_me$ https://www.youtube.com/watch?v=UMXZNLN3ArQ permanent;' /etc/nginx/sites-available/default
+# add the line for redirection
+sudo sed -i '/^}$/i \ \n\trewrite ^/redirect_me$ https://www.youtube.com/watch?v=UMXZNLN3ArQ permanent;' /etc/nginx/sites-available/default
+
+# test the nginx configuration
+sudo nginx -t
 
 # Restarting the nginx
 sudo service nginx restart
