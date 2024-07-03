@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# install nginx 
+# Nginx should be listening on port 80
+# return a page that contains the string Hello World!
+
+# Updating and installing nginx
+sudo apt-get update
+sudo apt-get install nginx -y
+
+# starting the nginx
+sudo service nginx start
+
+# setup to listen on port 80
+sudo ufw allow 'Nginx HTTP'
+
+# a page to return containing hello world
+echo "Hello World!" > /var/www/html/index.html
+
+sudo sed -i '/^}/i \ \n\trewrite ^/redirect_me$ https://www.youtube.com/watch?v=UMXZNLN3ArQ permanent;' /etc/nginx/sites-available/default
+
+# Restarting the nginx
+sudo service nginx restart
