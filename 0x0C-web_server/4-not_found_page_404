@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# install nginx 
+# Nginx should be listening on port 80
+# return a page that contains the string Hello World!
+
+# Updating and installing nginx
+sudo apt-get update
+sudo apt-get install nginx -y
+
+# starting the nginx
+sudo service nginx start
+
+# setup to listen on port 80
+sudo ufw allow 'Nginx HTTP'
+
+# backup file
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bkup
+
+# giving ownership and mode
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www/html/*
+
+# a page to return containing hello world
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
+
+# To redirect 
+NEW_LINE="\\\n\tlocation /redirect_me {\n\t\treturn 301 https://youtu.be/3NPZ-VKoa9Q?si=ewsZuSenvTqyJs3P;\n\t}\n"
+
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bkup
+
+# replace a line with NEW_LINE
+sudo sed -i "53i $NEW_LINE" /etc/nginx/sites-available/default
+
+#create new error page file
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+# To 404 page Error
+NEW_LINE_4="\\\nerror_page 404 /404.html;\n\n\tlocation /404.html {\n\t\tinternal;\n\t}\n"
+
+sudo sed -i "57i $NEW_LINE_4" /etc/nginx/sites-available/default
+
+# check for configuration success
+sudo nginx -t
+
+# Restarting the nginx
+sudo service nginx restart
