@@ -13,14 +13,23 @@ sudo service nginx start
 # setup to listen on port 80
 sudo ufw allow 'Nginx HTTP'
 
+# backup file
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bkup
+
+# giving ownership and mode
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www/html/*
+
 # a page to return containing hello world
-echo "Hello World!" > /var/www/html/index.html
+sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
-# add the line for redirection
-sudo sed -i '/^}$/i \ \n\trewrite ^/redirect_me$ https://www.youtube.com/watch?v=UMXZNLN3ArQ permanent;' /etc/nginx/sites-available/default
+# To redirect 
+NEW_LINE="\\\n\tlocation /redirect_me {\n\t\treturn 301 https://youtu.be/3NPZ-VKoa9Q?si=ewsZuSenvTqyJs3P;\n\t}\n"
 
-# test the nginx configuration
-sudo nginx -t
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bkup
+
+# replace a line with NEW_LINE
+sudo sed -i "53i $NEW_LINE" /etc/nginx/sites-available/default
 
 # Restarting the nginx
 sudo service nginx restart
