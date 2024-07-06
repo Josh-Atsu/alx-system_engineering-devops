@@ -3,7 +3,7 @@
 
 sudo apt update
 sudo apt install -y curl
-servive apache2 status
+service apache2 status
 sudo service apache2 start
 sed -i 's/80/8080/g' /etc/apache2/ports.conf
 sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf
