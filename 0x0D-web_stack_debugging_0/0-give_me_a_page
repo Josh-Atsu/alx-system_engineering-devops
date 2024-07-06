@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# debugging a web server
+
+sudo apt update
+sudo apt install -y curl
+sudo service apache2 start
+sed -i 's/80/8080/g' /etc/apache2/ports.conf
+sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf
+sudo service apache2 restart
