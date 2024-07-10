@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Debugging and dont allow nginx to start
+service nginx stop
