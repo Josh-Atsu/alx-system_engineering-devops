@@ -12,12 +12,6 @@ package { 'nginx':
   required => Exec['update_package_list'],
 }
 
-service { 'nginx':
-  ensure    => running,
-  enable    => true,
-  subscribe => Package['nginx']
-}
-
 file { '/var/www/html/index.html':
   ensure  => present,
   content => "Hello World!",
@@ -26,4 +20,10 @@ file { '/var/www/html/index.html':
 exec { 'redirect_me':
   command  => 'sudo sed -i "53i \\\n\tlocation /redirect_me {\n\t\treturn 301 https://youtu.be/3NPZ-VKoa9Q?si=ewsZuSenvTqyJs3P;\n\t}\n" /etc/nginx/sites-available/default',
   provider => 'shell',
+}
+
+service { 'nginx':
+  ensure  => running,
+  enable  => true,
+  require => Package['nginx']
 }
