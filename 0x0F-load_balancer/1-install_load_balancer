@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # install and configuring haproxy to serve two web servers
 
+# installing
 sudo apt-get -y update
 sudo apt-get install -y haproxy=1.6.\*
 
+# configuration
 echo '
 frontend bossjay.tech
 	bind 0:80
@@ -16,4 +18,5 @@ backend web_server
 	server 526397-web-02 100.26.232.116:80 check
 ' >> /etc/haproxy/haproxy.cfg
 
+# Restart HAproxy
 sudo service haproxy restart
