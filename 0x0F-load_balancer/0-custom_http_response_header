@@ -14,7 +14,7 @@ sudo service nginx start
 sudo ufw allow 'Nginx HTTP'
 
 # backup file
-cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bkup
+sudo cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bkup
 
 # giving ownership and mode
 sudo chown -R "$USER":"$USER" /var/www/html
@@ -35,17 +35,13 @@ sudo sed -i "53i $NEW_LINE" /etc/nginx/sites-available/default
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
 # To 404 page Error
-NEW_LINE_4="\\\nerror_page 404 /404.html;\n\n\tlocation /404.html {\n\t\tinternal;\n\t}\n"
+NEW_LINE_4="\\\n\terror_page 404 /404.html;\n\n\tlocation /404.html {\n\t\tinternal;\n\t}\n"
 
 sudo sed -i "57i $NEW_LINE_4" /etc/nginx/sites-available/default
 
-# 
-HOST_NAME=$(hostname)
-HEADER="\\\n\tadd_header X-Served-By $HOST_NAME;\n"
-FIND=$(grep "X-Server-by" /etc/nginx/sites-available/default)
-if [[ -z $FIND ]]; then
-    sed -i "23i $HEADER" /etc/nginx/sites-available/default
-fi
+# adding http header to response
+NEW_LINE_H="\\\n\tadd_header X-Served-By 526397-web-02;\n"
+sudo sed -i "63i $NEW_LINE_H" /etc/nginx/sites-available/default
 
 # check for configuration success
 sudo nginx -t
