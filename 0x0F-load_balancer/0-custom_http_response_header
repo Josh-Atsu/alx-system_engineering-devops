@@ -40,7 +40,7 @@ NEW_LINE_4="\\\n\terror_page 404 /404.html;\n\n\tlocation /404.html {\n\t\tinter
 sudo sed -i "57i $NEW_LINE_4" /etc/nginx/sites-available/default
 
 # adding http header to response
-NEW_LINE_H="\\\n\tadd_header X-Served-By 526397-web-02;\n"
+NEW_LINE_H="\\\n\tadd_header X-Served-By \$hostname;\n"
 sudo sed -i "63i $NEW_LINE_H" /etc/nginx/sites-available/default
 
 # check for configuration success

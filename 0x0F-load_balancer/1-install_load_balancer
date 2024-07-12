@@ -1,21 +1,22 @@
 #!/usr/bin/env bash
-# configures a new HAproxy as a load balancer
+# install and configuring haproxy to serve two web servers
 
-# Install HAproxy on a server
-apt-get -y update
-apt-get -y install haproxy=1.6.\*
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get install --no-install-recommends software-properties-common
+sudo add-apt-repository ppa:vbernat/haproxy-2.9
+sudo apt-get install haproxy=2.9.\*
 
-# Configure haproxy configuration file to distribute requests using a roundrobin algorithm
-echo '
+echo "
 frontend bossjay.tech
-        bind 0:80
-        default_backend web_servers
+	bind 0:80
+	mode http
+	default_backend web_server
 
-backend web_servers
-        balance roundrobin
-        server 526397-web-01 100.26.247.178:80
-        server 526397-web-02 100.26.232.116:80
-' >> /etc/haproxy/haproxy.cfg
+backend web_server
+	balance roundrobin
+	server 526397-web-01 100.26.247.178:80 check
+	server 526397-web-02 100.26.232.116:80 check
+" >> /etc/haproxy/haproxy.cfg
 
-# Restart HAproxy service
-service haproxy restart
+sudo service haproxy restart
