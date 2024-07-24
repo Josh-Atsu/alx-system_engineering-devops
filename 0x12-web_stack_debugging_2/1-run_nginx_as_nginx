@@ -8,11 +8,11 @@ sudo service nginx stop
 chmod 644 /etc/nginx/nginx.conf
 
 # change ownership of nginx directory
-chown -R nginx:nginx /etc/nginx/*
+chown -R nginx:nginx /etc/nginx/
 
 # Edit the file to the right configuration
-sed -i 's/#user www-data/user nginx/' /etc/nginx/nginx.conf
-sed -i 's/80/8080/' /etc/nginx/sites-available
+sudo sed -i 's/#user www-data/user nginx/' /etc/nginx/nginx.conf
+sudo sed -i 's/80/8080/' /etc/nginx/sites-available
 
 # check the pid running onport 8080 and kill them
 for pid in $(pidof apache2); do
