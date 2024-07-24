@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Nginx is running as the nginx user.
+
+# Stop nginx from running
+sudo service nginx stop
+
+# change the mode of the nginx.conf file
+chmod 644 /etc/nginx/nginx.conf
+
+# change ownership of nginx directory
+chown -R nginx:nginx /etc/nginx/*
+
+# Edit the file to the right configuration
+sed -i 's/#user www-data/user nginx/' /etc/nginx/nginx.conf
+sed -i 's/80/8080/' /etc/nginx/sites-available
+
+# check the pid running onport 8080 and kill them
+for pid in $(pidof apache2); do
+	kill "$pid"
+done
+
+# start the service using nginx
+sudo -u nginx service nginx start
