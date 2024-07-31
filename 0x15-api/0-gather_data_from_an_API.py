@@ -29,5 +29,6 @@ def main():
     for task in completed:
         print("\t {}".format(task))
 
+
 if __name__ == "__main__":
     main()
