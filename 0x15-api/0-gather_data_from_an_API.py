@@ -20,7 +20,7 @@ def main():
     except Exception as e:
         return
     response = requests.get(url + "users/{}".format(int_n)).json()
-    Employer_name = response['name']
+    Employer_name = response.get('name')
     param = {"userId": int_n}
     todo = requests.get(url + "todos", param).json()
     completed = [t.get("title") for t in todo if t.get("completed") is True]
