@@ -17,7 +17,6 @@ if __name__ == "__main__":
 
     response_user = requests.get(url + "users/{}".format(employee_id))
     response = response_user.json()
-    employee_name = response.get('name')
 
     param = {"userId": employee_id}
     todos = requests.get(url + "todos", params=param)
@@ -29,6 +28,6 @@ if __name__ == "__main__":
             completed.append(t.get("title"))
 
     print("Employee {} is done with tasks({}/{}):".format(
-            employee_name, len(completed), len(todo)))
+            response.get("name"), len(completed), len(todo)))
     for task in completed:
         print("\t {}".format(task))
