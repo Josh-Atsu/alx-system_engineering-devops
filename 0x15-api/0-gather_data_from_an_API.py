@@ -12,12 +12,22 @@ if __name__ == "__main__":
     main function
     """
     url = "https://jsonplaceholder.typicode.com/"
+
     employee_id = int(argv[1])
-    response = requests.get(url + "users/{}".format(employee_id)).json()
+
+    response_1 = requests.get(url + "users/{}".format(employee_id))
+    response = response_1.json()
     employee_name = response.get('name')
+
     param_1 = {"userId": employee_id}
-    todo = requests.get(url + "todos", param_1).json()
-    completed = [t.get("title") for t in todo if t.get("completed") is True]
+    todos = requests.get(url + "todos", param_1)
+    todo = todos.json()
+
+    completed = []
+    for t in todo:
+        if t.get("completed") is True:
+            completed.append(t.get("title"))
+
     print("Employee {} is done with tasks({}/{}):".format(
             employee_name, len(completed), len(todo)))
     for task in completed:
