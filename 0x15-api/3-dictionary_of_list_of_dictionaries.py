@@ -30,8 +30,9 @@ if __name__ == "__main__":
     for user in users_all:
         user_id = user["id"]
 
-        todos_list = requests.get(url + "todos?userId={}".format(user_id)).json()
-        
+        todos_list = requests.get(url + "todos?userId={}"
+                                  .format(user_id)).json()
+
         data_in_todo = {user_id: []}
         for todo in todos_list:
             task_info = {"username": user.get("username"),
