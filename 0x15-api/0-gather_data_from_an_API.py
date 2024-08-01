@@ -4,7 +4,7 @@ for a given employee ID,
 returns information about his/her TODO list progress.
 """
 import requests
-from sys import argv
+import sys
 
 
 if __name__ == "__main__":
@@ -13,7 +13,7 @@ if __name__ == "__main__":
     """
     url = "https://jsonplaceholder.typicode.com/"
 
-    employee_id = int(argv[1])
+    employee_id = int(sys.argv[1])
 
     response_user = requests.get(url + "users/{}".format(employee_id))
     response = response_user.json()
