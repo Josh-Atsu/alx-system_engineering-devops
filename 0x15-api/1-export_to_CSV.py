@@ -10,14 +10,14 @@ File name must be: USER_ID.json
 """
 import csv
 import requests
-from sys import argv
+import sys
 
 
 if __name__ == "__main__":
     """main function"""
     url = "https://jsonplaceholder.typicode.com/"
 
-    user_id = argv[1]
+    user_id = sys.argv[1]
 
     user_response = requests.get(url + "users/{}".format(user_id))
     user = user_response.json()
