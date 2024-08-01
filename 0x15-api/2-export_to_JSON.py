@@ -32,8 +32,8 @@ if __name__ == "__main__":
     data_to_export = {user_id: []}
     for t in todos:
         task_details = {"task": t.get("title"),
-                "completed": t.get("completed"),
-                "username": user.get("username")}
+                        "completed": t.get("completed"),
+                        "username": user.get("username")}
         data_to_export[user_id].append(task_details)
 
     with open("{}.json".format(user_id), "w") as jsonfile:
