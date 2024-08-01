@@ -15,12 +15,12 @@ if __name__ == "__main__":
 
     employee_id = int(argv[1])
 
-    response_1 = requests.get(url + "users/{}".format(employee_id))
-    response = response_1.json()
+    response_user = requests.get(url + "users/{}".format(employee_id))
+    response = response_user.json()
     employee_name = response.get('name')
 
-    param_1 = {"userId": employee_id}
-    todos = requests.get(url + "todos", param_1)
+    param = {"userId": employee_id}
+    todos = requests.get(url + "todos", params=param)
     todo = todos.json()
 
     completed = []
