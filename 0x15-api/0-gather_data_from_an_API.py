@@ -20,12 +20,12 @@ def main():
     except Exception as e:
         return
     response = requests.get(url + "users/{}".format(int_n)).json()
-    Employer_name = response.get('name')
+    employer_name = response.get('name')
     param = {"userId": int_n}
     todo = requests.get(url + "todos", param).json()
     completed = [t.get("title") for t in todo if t.get("completed") is True]
     print("Employee {} is done with tasks({}/{}):".format(
-            Employer_name, len(completed), len(todo)))
+            employer_name, len(completed), len(todo)))
     for task in completed:
         print("\t {}".format(task))
 
