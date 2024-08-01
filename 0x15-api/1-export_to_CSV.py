@@ -23,11 +23,12 @@ if __name__ == "__main__":
     user = user_response.json()
 
     params = {"userId": user_id}
-    todos = requests.get(url + "todos", params).json()
-    
+    todos_response = requests.get(url + "todos", params)
+    todos = todos_response.json()
+
     with open("{}.csv".format(user_id), "w", newline="") as csvfile:
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
 
         for t in todos:
             writer.writerow([user_id, user.get("username"),
-                    t.get("completed"), t.get("title")])
+                            t.get("completed"), t.get("title")])
