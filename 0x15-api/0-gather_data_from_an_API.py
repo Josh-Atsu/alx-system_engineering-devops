@@ -7,28 +7,25 @@ import requests
 from sys import argv
 
 
-def main():
+if __name__ == "__main__":
     """
     main function
     """
     url = "https://jsonplaceholder.typicode.com/"
     try:
         if len(argv) == 2:
-            int_n = int(argv[1])
+            employee_id = int(argv[1])
         else:
             return
     except Exception as e:
         return
-    response = requests.get(url + "users/{}".format(int_n)).json()
-    employer_name = response.get('name')
-    param = {"userId": int_n}
-    todo = requests.get(url + "todos", param).json()
+
+    response = requests.get(url + "users/{}".format(employee_id)).json()
+    employee_name = response.get('name')
+    param = {"userId": employee_id}
+    todo = requests.get(url + "todos", param=param).json()
     completed = [t.get("title") for t in todo if t.get("completed") is True]
     print("Employee {} is done with tasks({}/{}):".format(
-            employer_name, len(completed), len(todo)))
+            employee_name, len(completed), len(todo)))
     for task in completed:
         print("\t {}".format(task))
-
-
-if __name__ == "__main__":
-    main()
